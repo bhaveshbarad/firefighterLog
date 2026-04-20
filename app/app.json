@@ -1,0 +1,32 @@
+{
+    "expo": {
+        "name": "Firefighter Log",
+        "slug": "firefighter-log",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/icon.png",
+        "userInterfaceStyle": "automatic",
+        "splash": {
+            "image": "./assets/icon.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "assetBundlePatterns": ["**/*"],
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "com.firefighterlog.app"
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/icon.png",
+                "backgroundColor": "#ffffff"
+            },
+            "package": "com.firefighterlog.app"
+        },
+        "web": {
+            "bundler": "metro",
+            "favicon": "./assets/icon.png"
+        },
+        "scheme": "firefighter-log"
+    }
+}

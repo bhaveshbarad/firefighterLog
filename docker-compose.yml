@@ -1,0 +1,64 @@
+services:
+    api:
+        build:
+            context: ./api
+        ports:
+            - "3000:3000"
+        environment:
+            PORT: 3000
+            NODE_ENV: production
+            DATABASE_HOST: mysql
+            DATABASE_PORT: 3306
+            DATABASE_USER: app
+            DATABASE_PASSWORD: apppass
+            DATABASE_NAME: firefighter_log
+            JWT_SECRET: dev-jwt-secret-change-in-production
+        depends_on:
+            mysql:
+                condition: service_healthy
+
+    web:
+        build:
+            context: ./app
+            dockerfile: Dockerfile
+        ports:
+            - "8081:8081"
+        environment:
+            EXPO_PUBLIC_API_URL: http://localhost:3000
+            # Allow Metro file watching / reloads (Dockerfile sets CI=1 for non-interactive installs).
+            CI: "false"
+        volumes:
+            # Use your host app/ sources so UI changes apply without rebuilding the image.
+            - ./app:/app
+        depends_on:
+            - api
+
+    mysql:
+        image: mysql:8.0
+        environment:
+            MYSQL_ROOT_PASSWORD: devroot
+            MYSQL_DATABASE: firefighter_log
+            MYSQL_USER: app
+            MYSQL_PASSWORD: apppass
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql_data:/var/lib/mysql
+        healthcheck:
+            test:
+                [
+                    "CMD",
+                    "mysqladmin",
+                    "ping",
+                    "-h",
+                    "localhost",
+                    "-udevroot",
+                    "-pdevroot",
+                ]
+            interval: 5s
+            timeout: 5s
+            retries: 10
+            start_period: 25s
+
+volumes:
+    mysql_data:

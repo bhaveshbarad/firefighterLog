@@ -1,0 +1,17 @@
+# Development image: full deps + Nest CLI for `nest start --watch`.
+# Use with docker-compose.dev.yml (bind-mount ./api, named volume for node_modules).
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package.json package-lock.json* ./
+COPY docker-entrypoint-dev.sh /usr/local/bin/docker-entrypoint-dev.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint-dev.sh
+
+EXPOSE 3000
+
+ENV NODE_ENV=development
+ENV PORT=3000
+
+ENTRYPOINT ["docker-entrypoint-dev.sh"]
+CMD ["npm", "run", "start:dev"]
