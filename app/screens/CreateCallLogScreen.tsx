@@ -29,8 +29,6 @@ export type CreateCallLogScreenProps = {
     onCreated:  () => void;
 };
 
-ssh-keygen -t ed25519 -C "bhaveshbarad@gmail.com" -f ~/.ssh/id_ed25519_github_account_bhaveshbarad
-
 function formatReportedAt(d: Date): string {
     return d.toLocaleString(undefined, {
         dateStyle: 'medium',
