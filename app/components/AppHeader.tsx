@@ -20,11 +20,20 @@ export function AppHeader({
 }: AppHeaderProps): ReactElement {
     return (
         <View style={styles.header}>
-            <View style={styles.headerMain}>
+            <View style={styles.headerLeftSlot}>
                 {headerLeft ? headerLeft : null}
+            </View>
+            <View style={styles.headerTitleWrap}>
                 <Text
-                    style={styles.headerTitle}
+                    style={[
+                        styles.headerTitle,
+                        headerLeft
+                            ? styles.headerTitleAfterBack
+                            : styles.headerTitleLeading,
+                    ]}
                     accessibilityRole="header"
+                    numberOfLines={1}
+                    ellipsizeMode={headerLeft ? 'head' : 'tail'}
                 >
                     {title}
                 </Text>

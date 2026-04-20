@@ -15,19 +15,38 @@ export const appHeaderStyles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(0, 0, 0, 0.28)',
     },
-    headerMain: {
-        flex:          1,
+    headerLeftSlot: {
+        flexShrink:    0,
         flexDirection: 'row',
         alignItems:    'center',
-        minWidth:      0,
+    },
+    /**
+     * Fills space between left and right controls. Title alignment depends on
+     * whether a back/left action is present (see headerTitleLeading vs
+     * headerTitleAfterBack).
+     */
+    headerTitleWrap: {
+        flex:           1,
+        minWidth:       0,
+        justifyContent: 'center',
     },
     headerActions: {
-        flexDirection: 'row',
-        alignItems:    'center',
+        flexShrink:      0,
+        flexDirection:   'row',
+        alignItems:      'center',
     },
     headerTitle: {
         ...typography.appBarTitle,
         color: colors.textOnPrimary,
+        width: '100%',
+    },
+    /** Home and other screens with no back control: title on the left. */
+    headerTitleLeading: {
+        textAlign: 'left',
+    },
+    /** Screens with a back button: title right-aligned in the middle band. */
+    headerTitleAfterBack: {
+        textAlign: 'right',
     },
     menuButton: {
         flexDirection:     'row',
