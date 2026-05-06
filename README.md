@@ -1,4 +1,4 @@
-# Firefighter Log — base scaffold
+# Firefighter Log
 
 Monorepo layout:
 
